@@ -1,10 +1,12 @@
-import logo from './logo.svg';
-import IngredientRequest from './pages/IngredientRequest';
 import './App.css';
+import HomePage from './pages/Home';
+import IngredientRequest from './pages/IngredientRequest';
 
 function App() {
   return (
-    <IngredientRequest/>
+    <div className="App">
+      <HomePage />
+    </div>
   );
 }
 
