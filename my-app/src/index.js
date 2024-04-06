@@ -6,6 +6,7 @@ import Login from "./pages/Login.js";
 import Landing from "./pages/Landing.js";
 import Home from "./pages/Home.js";
 import reportWebVitals from './reportWebVitals';
+import IngredientRequest from './pages/IngredientRequest.js';
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,6 +22,7 @@ root.render(
        <Route exact path="/" element={<Landing/>}/>
        <Route exact path="/login" element={<Login/>}/>
        <Route exact path="/home" element={<Home/>}/>
+       <Route exact path="/request" element={<IngredientRequest/>}/>
      </Routes>
      </Router>
   </React.StrictMode>
