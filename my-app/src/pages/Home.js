@@ -64,15 +64,21 @@ const dummyData = [
 
 export default function HomePage() {
   let data = dummyData;
+  const [code, setCode] = useState(null);
+  const [res, setRes] = useState(null);
 
   useEffect(() => {
     const code = localStorage.getItem('code');
     const res = JSON.parse(localStorage.getItem('data'));
     console.log(code)
     console.log(res)
-    // if (res) {
-    //     data = res;
-    // }
+
+    if (code) {
+        setCode(code);
+      }
+      if (res) {
+        setRes(res);
+      }
   },[]);
 
 

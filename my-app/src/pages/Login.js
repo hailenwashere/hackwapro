@@ -28,7 +28,7 @@ const Login = () => {
         console.log(name)
         var loginValid = false;
         if(code === "JCHEWY"){
-            console.log("INININ");
+            // console.log("INININ");
             localStorage.setItem("code", code);
             const recString = JSON.stringify(records);
             localStorage.setItem("data", recString);
