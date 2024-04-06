@@ -16,7 +16,7 @@ def hello():
     print("request received",file=sys.stderr)
     return "Hello world! CHEWYJ"
 
-@app.route('/getdata', methods=['GET'])
+@app.route('/getdata', methods=['POST'])
 def getData():
     data = request.get_json()
     ret = fb.getFridgeData(data['fridgeID'])

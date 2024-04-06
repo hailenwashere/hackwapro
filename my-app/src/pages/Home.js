@@ -1,5 +1,6 @@
 import Fridge from '../components/Fridge';
 import Header from '../components/Header';
+import React, {useEffect, useState} from "react";
 
 const dummyData = [
   {
@@ -60,8 +61,20 @@ const dummyData = [
   },
 ];
 
+
 export default function HomePage() {
   let data = dummyData;
+
+  useEffect(() => {
+    const code = localStorage.getItem('code');
+    const res = JSON.parse(localStorage.getItem('data'));
+    console.log(code)
+    console.log(res)
+    // if (res) {
+    //     data = res;
+    // }
+  },[]);
+
 
   return (
     <div>
