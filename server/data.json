@@ -1,1 +1,52 @@
-{"fridges": {"JACHEWY": {"Meat": {"beef": {"ingredient_array": {"Jacky": {"expiration": "04/09/2024", "quantity": 1}}, "min_expiry": "04/09/2024", "total_quantity": 1}, "chicken": {"ingredient_info": {"Ellen": {"expiration": "01/30/2024", "quantity": 2}, "Yifan": {"expiration": "01/24/2024", "quantity": 2}}, "min_expiry": "01/24/2024", "total_quantity": 4}}, "Vegetables": {"broccoli": {"ingredient_array": {"Ellen": {"expiration": "02/03/2024", "quantity": 2}, "Warrick": {"expiration": "01/24/2024", "quantity": 2}}, "min_expiry": "01/24/2024", "total_quantity": 4}}}}}
+{
+    "fridges": {
+        "JACHEWY": {
+            "emails" : {
+                "Yifan": "yifan411@g.ucla.edu",
+                "Warrick": "warrickhe@g.ucla.edu"
+            },
+            "Meat": {
+                "chicken": {
+                    "total_quantity": 4,
+                    "min_expiry": "01/24/2024",
+                    "ingredient_info": {
+                        "Yifan": {
+                            "quantity": 2,
+                            "expiration": "01/24/2024"
+                        },
+                        "Ellen": {
+                            "quantity": 2,
+                            "expiration": "01/30/2024"
+                        }
+                    }
+                },
+                "beef": {
+                    "total_quantity": 1,
+                    "min_expiry": "04/09/2024",
+                    "ingredient_array": {
+                        "Jacky": {
+                            "quantity": 1,
+                            "expiration": "04/09/2024"
+                        }
+                    }
+                }
+            },
+            "Vegetables": {
+                "broccoli": {
+                    "total_quantity": 4,
+                    "min_expiry": "01/24/2024",
+                    "ingredient_array": {
+                        "Warrick": {
+                            "quantity": 2,
+                            "expiration": "01/24/2024"
+                        },
+                        "Ellen": {
+                            "quantity": 2,
+                            "expiration": "02/03/2024"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
