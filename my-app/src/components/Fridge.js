@@ -3,6 +3,9 @@ import ListItem from './ListItem';
 
 export default function Fridge({ props }) {
   let items = props.category_data;
+  // console.log("lhihihihihi")
+  // console.log(items)
+  // console.log("lhihihihihi")
 
   return (
     <div className="fridge">
