@@ -1,5 +1,6 @@
 import './App.css';
 import HomePage from './pages/Home';
+import IngredientRequest from './pages/IngredientRequest';
 
 function App() {
   return (
