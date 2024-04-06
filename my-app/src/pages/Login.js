@@ -31,7 +31,7 @@ const Login = () => {
             // console.log("INININ");
             localStorage.setItem("code", code);
             const recString = JSON.stringify(records);
-            localStorage.setItem("data", recString);
+            localStorage.setItem("data", recString)
             navigate("/home");
             window.location.reload();
             loginValid = true;
@@ -71,7 +71,7 @@ const Login = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              fridgeID: 'JCHEWY',
+              fridgeID: 'JACHEWY',
             })
           });
           const records = await response.json();
@@ -79,7 +79,7 @@ const Login = () => {
         }
         // this immediately gets them
         getRecords();
-        // console.log(records)
+        console.log(records)
         return;
       }, [records.length]);
 
