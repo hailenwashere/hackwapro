@@ -2,6 +2,7 @@ import firebase_admin
 import json
 import os
 from firebase_admin import db
+from datetime import datetime, date, timedelta
 
 cred_obj = firebase_admin.credentials.Certificate('./secrets/ourfridge-66c55-firebase-adminsdk-oai76-5fcc197c33.json')
 database_url = "https://ourfridge-66c55-default-rtdb.firebaseio.com/"
@@ -39,23 +40,30 @@ def getFridgeData(fridgeID):
     try:
         ref = db.reference(f"/fridges/{fridgeID}")
         data = ref.get()
-        for d in data:
-            d["data"].remove("filler")
         return data
     except:
         return None
 
-def hasFoodType(food_type, fridge):
-    for food_cat in fridge:
-        if food_cat["category"] == food_type:
-            return True
-    return False
-
 def insertItem(fridgeID, itemData):
     ref = db.reference(f"/fridges/{fridgeID}")
     food_type, category = itemData['food_type'], itemData['category']
+    owner, quantity, expiration = itemData['owner'], int(itemData['quantity']), itemData['expiration']
     fridge = ref.get()
+    if (food_type not in fridge):
+        fridge[food_type] = {}
+    if category not in fridge[food_type]:
+        fridge[food_type][category] = {"total_quantity":0,"min_expiry":expiration,"ingredient_info":{}}
+    fridge[food_type][category]["ingredient_info"][owner] = {
+		"quantity":quantity,
+		"expiration":expiration
+	}
+    fridge[food_type][category]["total_quantity"]+=quantity
     
+    cur = datetime.strptime(expiration, "%m/%d/%Y")
+    prev = datetime.strptime(fridge[food_type][category]["min_expiry"], "%m/%d/%Y")
+    if (cur-prev).days < 0:
+        fridge[food_type][category]["min_expiry"] = expiration
+    ref.set(fridge)
     return "something probably happened"
 
 if __name__ == '__main__':
