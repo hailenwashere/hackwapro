@@ -1,4 +1,7 @@
+import { useState } from 'react'; 
+
 const IngredientRequest = () => {
+    const [requestmade, setRequestmade] = useState(false)
     /* example props - a single entry in category_data corresponding to the desired ingredient
         {
             ingredient_name: 'Chicken',
@@ -20,7 +23,7 @@ const IngredientRequest = () => {
     */
     let props = {
         ingredient_name: 'Chicken',
-        total_quantity: 3,
+        total_quantity: 4,
         min_expiry: '01/24/2024',
         ingredient_array: [
             {
@@ -83,6 +86,41 @@ const IngredientRequest = () => {
     }
     ingredient_array.sort(compareIngredients)
 
+    // quantity dropdown: update quantity using dropdown, gives options up to total_quantity
+    const [quantity, setQuantity] = useState(0)
+    const possiblequantities = Array(total_quantity + 1).fill(0).map((_, index)=> index);
+    const handleChange = (event) => {
+        setQuantity(event.target.value)
+    };
+
+    // request button: on request, update the data
+    function onClick() 
+    {
+        // update data
+        
+        // post data
+            /* schema:
+            {
+                food_type: 'meat',
+                category: 'chicken',
+                owner: 'WARRICKKKKKKK',
+                quantity: '400',
+                expiration: '04/06/2025',
+            }
+            */
+
+        setRequestmade(true);
+    }
+
+    if (requestmade)
+    {
+        return (
+            <div className='requestsuccess'>
+                <h2>Request Made!</h2>
+                
+            </div>
+        );
+    }
     return ( 
         <div className="requestcontainer">
             <h2>Available Ingredients</h2>
@@ -104,11 +142,18 @@ const IngredientRequest = () => {
                 </tbody>
                 ))}
             </table>
-            <div>
+            <div className="requestsection">
                 <h3>Quantity</h3>
-                <input/>
+                <label>
+                    How many {ingredient_name.toLowerCase()}'s?
+                    <select value={quantity} onChange={handleChange}>
+                        {possiblequantities.map((quantity) => (
+                            <option value={ quantity }>{quantity}</option>
+                        ))}
+                    </select>
+                </label>
+                <button onClick={ onClick }>Request!</button>
             </div>
-            
         </div>
     );
 }
