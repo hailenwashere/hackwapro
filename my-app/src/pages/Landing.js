@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import { Link } from 'react-router-dom';
+
 // import { useNavigate } from "react-router";
 
 import '../styles/Home.css';
@@ -65,13 +67,42 @@ const Home = () => {
 
     return (
         <body>
-        <div>
-        <div className="title">Landing</div>
-            <a href="./login"> Start </a>
+        <div style={styles.container}>
+        <div className="title" style={styles.title}>OURFRIDGE</div>
+        <Link to="./login" style={styles.startButton}>Start</Link>
         </div>
         </body>
         
     )
-}
 
-export default Home;
+};
+
+const styles = {
+    container: {
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        height: '100vh', // This will make the container take up the full height of the viewport
+      },
+      title: {
+        fontSize: '200px', // Increase font size for a big title
+        fontFamily: 'monospace',
+        marginBottom: '20px',
+      },
+      startButton: {
+        display: 'inline-block',
+        padding: '10px 20px',
+        fontSize: '18px',
+        backgroundColor: '#007bff',
+        color: 'white',
+        textDecoration: 'none',
+        borderRadius: '5px',
+        transition: 'background-color 0.3s ease',
+      },
+      startButtonHover: {
+        backgroundColor: '#0056b3',
+      },
+  };
+
+  export default Home;
