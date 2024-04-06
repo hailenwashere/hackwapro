@@ -4,6 +4,7 @@ import './index.css';
 // import App from './App';
 import Login from "./pages/Login.js";
 import Landing from "./pages/Landing.js";
+import Home from "./pages/Home.js";
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter as Router,
@@ -19,10 +20,13 @@ root.render(
      <Routes>
        <Route exact path="/" element={<Landing/>}/>
        <Route exact path="/login" element={<Login/>}/>
+       <Route exact path="/home" element={<Home/>}/>
      </Routes>
      </Router>
   </React.StrictMode>
-  {/* <a href="./home"> home</a> */}
+  <a href="./"> land</a>
+  <a href="./login"> login</a>
+  <a href="./home"> home</a>
   </div>
 );
 
