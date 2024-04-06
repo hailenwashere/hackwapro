@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
-import Home from "./pages/Home.js";
+import Login from "./pages/Login.js";
+import Landing from "./pages/Landing.js";
 import reportWebVitals from './reportWebVitals';
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,10 +13,17 @@ import {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
+  <div>
   <React.StrictMode>
-    <Home/>
+      <Router>
+     <Routes>
+       <Route exact path="/" element={<Landing/>}/>
+       <Route exact path="/login" element={<Login/>}/>
+     </Routes>
+     </Router>
   </React.StrictMode>
+  {/* <a href="./home"> home</a> */}
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
