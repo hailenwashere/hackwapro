@@ -7,13 +7,22 @@ export default function Fridge({ props }) {
   return (
     <div className="fridge">
       <h2>{props.category_name}</h2>
-      <ul>
-        {items.map((item) => (
-          <li>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+            <th>Earliest Expiration Date</th>
+            <th>Request</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => (
             <ListItem props={item} />
-          </li>
-        ))}
-      </ul>
+          ))}
+        </tbody>
+      </table>
+      <ul></ul>
     </div>
   );
 }

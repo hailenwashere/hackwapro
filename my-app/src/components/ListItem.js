@@ -4,13 +4,13 @@ export default function ListItem({ props }) {
   //console.log(props);
 
   return (
-    <div className="listItem" style={{ display: 'flex' }}>
-      <div style={{ marginRight: '10px' }}>{props.ingredient_name}</div>
-      <div style={{ marginRight: '10px' }}>{props.total_quantity}</div>
-      <div style={{ marginRight: '10px' }}>{props.min_expiry}</div>
-      <div>
+    <tr className="listItem">
+      <td>{props.ingredient_name}</td>
+      <td>{props.total_quantity}</td>
+      <td>{props.min_expiry}</td>
+      <td>
         <button>Request</button>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }
