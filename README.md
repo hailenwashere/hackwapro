@@ -15,3 +15,12 @@ git clone https://github.com/Hack-with-a-pro/boilerplates.git
 
 Note: if you cloned this repo before the day of the hackathon, please do a `git pull` to pull the latest changes.
 # hackwapro
+
+# Hack with a Pro
+Table 4's repo for Hack with a Pro 2024!
+
+# To set up the project
+## Backend 
+cd server
+pip3 install REQUIREMENTS.txt
+python3 server.py
