@@ -13,6 +13,15 @@ def hello():
     print("request received",file=sys.stderr)
     return "Hello world! CHEWYJ"
 
+@app.route('/getdata', methods=['GET'])
+def getData():
+    return "dummy"
+
+
+@app.route('/putData', methods=['POST'])
+def putData():
+    return "dummy"
+
 
 if __name__ == '__main__':
     app.run(host="localhost", port=7272, debug=True)
