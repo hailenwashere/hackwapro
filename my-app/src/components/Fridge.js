@@ -48,7 +48,7 @@ export default function Fridge({ props }) {
                         <th>Ingredient</th>
                         <th>Quantity</th>
                         <th>Earliest Expiration Date</th>
-                        <th>Request</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
