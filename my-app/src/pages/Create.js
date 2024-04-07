@@ -52,6 +52,26 @@ const Login = () => {
         };
         console.log(obj)
 
+        if (!code){
+            alert("Must have code");
+        }
+
+        await fetch("http://localhost:7272/makefridge", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        })
+            .catch(error => {
+                window.alert(error);
+                return;
+        });
+
+        console.log("Add fridge works");
+
+
+
 
         // var loginValid = false;
         // if(code === "JACHEWY"){
@@ -71,26 +91,26 @@ const Login = () => {
         // }
     }
 
-    useEffect(() => {
-        async function getRecords() {
-          const response = await fetch('http://localhost:7272/getdata', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              fridgeID: 'JACHEWY',
-            })
-          });
-          const records = await response.json();
-          setRecords(records);
-        }
-        // this immediately gets them
-        getRecords();
-        console.log(records)
-        return;
-      }, [records.length]);
+    // useEffect(() => {
+    //     async function getRecords() {
+    //       const response = await fetch('http://localhost:7272/getdata', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Accept': 'application/json',
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //           fridgeID: 'JACHEWY',
+    //         })
+    //       });
+    //       const records = await response.json();
+    //       setRecords(records);
+    //     }
+    //     // this immediately gets them
+    //     getRecords();
+    //     console.log(records)
+    //     return;
+    //   }, [records.length]);
 
 
     return (
