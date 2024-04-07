@@ -9,7 +9,7 @@ export default function HomePage() {
     useEffect(() => {
         const code = localStorage.getItem('code');
         const res = JSON.parse(localStorage.getItem('data'));
-        
+
         // console.log(code);
         // console.log('this is res');
         // console.log(typeof(res));
@@ -23,11 +23,9 @@ export default function HomePage() {
     }, []);
 
     let categories = Array();
-    for (const property in res)
-    {
-        if (property !== "emails")
-        {
-            categories.push([property, res[property]]) // push ["meat", {"beef"...}]
+    for (const property in res) {
+        if (property !== 'emails') {
+            categories.push([property, res[property]]); // push ["meat", {"beef"...}]
         }
     }
     // console.log(categories)
@@ -35,9 +33,8 @@ export default function HomePage() {
     return (
         <div>
             <Header />
-            <p>home page</p>
             {categories.map((fridgecategory) => (
-                <Fridge props={fridgecategory} key={fridgecategory[0]}/>
+                <Fridge props={fridgecategory} key={fridgecategory[0]} />
             ))}
         </div>
     );

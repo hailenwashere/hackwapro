@@ -2,6 +2,7 @@ import firebase_admin
 import json
 import os
 from firebase_admin import db
+import uuid
 from datetime import datetime, date, timedelta
 
 cred_obj = firebase_admin.credentials.Certificate('./secrets/ourfridge-66c55-firebase-adminsdk-oai76-5fcc197c33.json')
@@ -17,7 +18,7 @@ def initApp():
         ref.set(file_contents)
         print('loaded prev state')
     else:
-    	ref.set({"fridges":{"dummy":["wow real data"]}})
+        ref.set({"fridges":{"dummy":["wow real data"]}})
 
 def saveState():
     ref = db.reference("/")
@@ -29,9 +30,12 @@ def initFridge(fridgeID, names, emails):
     #check if fridge has been made
     ref = db.reference("/fridges")
     curFridges = ref.get()
-        
     if fridgeID not in curFridges:
         curFridges[fridgeID] = {"emails":{}}
+        for i, name in enumerate(names):
+            if name == "":
+                continue
+            curFridges[fridgeID]["emails"][name] = emails[i]
     ref.set(curFridges)
 
 def getFridgeData(fridgeID):
@@ -52,9 +56,9 @@ def insertItem(fridgeID, itemData):
     if category not in fridge[food_type]:
         fridge[food_type][category] = {"total_quantity":0,"min_expiry":expiration,"ingredient_info":{}}
     fridge[food_type][category]["ingredient_info"][owner] = {
-		"quantity":quantity,
-		"expiration":expiration
-	}
+        "quantity":quantity,
+        "expiration":expiration
+    }
     fridge[food_type][category]["total_quantity"]+=quantity
     
     cur = datetime.strptime(expiration, "%m/%d/%Y")
@@ -69,6 +73,8 @@ def deleteItem(fridgeID, itemData):
     food_type, category = itemData['food_type'], itemData['category']
     owner, quantity = itemData['owner'], int(itemData['quantity'])
     fridge = ref.get()
+    if fridge[food_type][category]["ingredient_info"][owner]["quantity"] < quantity:
+        return False
     fridge[food_type][category]["ingredient_info"][owner]["quantity"]-=quantity
     fridge[food_type][category]["total_quantity"]-=quantity
     if fridge[food_type][category]["ingredient_info"][owner]["quantity"] == 0:
@@ -85,8 +91,51 @@ def deleteItem(fridgeID, itemData):
     fridge[food_type][category]["min_expiry"] = min_time
     print(fridge)
     ref.set(fridge)
-    return "something probably happened"
+    return True
 
+def makeRequest(reqBody):
+    req_id = uuid.uuid1()
+    ref = db.reference(f"/requests")
+    requests = ref.get()
+    requests[req_id] = {
+        "fridgeID": reqBody["fridgeID"],
+        "requester": reqBody["requester"],
+        "requestee": reqBody["requestee"],
+        "food_type": reqBody["food_type"],
+        "category": reqBody["category"],
+        "quantity": reqBody["quantity"]
+    }
+    ref.push(requests)
+    return req_id
+
+def requestExists(req_id):
+    ref = db.reference(f"/requests")
+    requests = ref.get()
+    if req_id not in requests:
+        return False
+    return True
+
+def acceptRequest(req_id):
+    ref = db.reference(f"/requests")
+    requests = ref.get()
+    req_data = requests[req_id]
+    del requests[req_id]
+    ref.set(requests)
+    fridgeID = req_data["fridgeID"]
+    req_data["owner"] = req_data["requestee"]
+    return deleteItem(fridgeID,req_data)
+    
+        
+def rejectRequest(req_id):
+    ref = db.reference(f"/requests")
+    requests = ref.get()
+    del requests[req_id]
+    ref.set(requests)
+
+def getEmail(fridgeID, name):
+    ref = db.reference(f"/fridges/{fridgeID}/emails")
+    return ref.get()[name]
+    
 if __name__ == '__main__':
     initApp()
     input("waiting to continue")
