@@ -8,7 +8,7 @@ from openai import OpenAI
 
 load_dotenv('../.env')
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="")
 
 # Create a generic function that calls the OpenAI API for chat completion
 def chat(content):
