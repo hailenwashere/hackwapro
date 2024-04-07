@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router";
-
+import Header from '../components/Header_left';
 import '../styles/Home.css';
 
 const Login = () => {
@@ -115,7 +115,7 @@ const Login = () => {
 
     return (
         <body>
-
+            <Header />
         <div>
             <div className="title"> Create New Fridge</div>
             <form  onSubmit={onLogin}>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../styles/Home.css';
+import Header from '../components/Header';
 
 const GPTPrompt = () => {
     const [form, setForm] = useState({
@@ -37,6 +38,7 @@ const GPTPrompt = () => {
 
     return (
         <body>
+            <Header />
             <div>
                 <form onSubmit={onLogin}>
                     <input

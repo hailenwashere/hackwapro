@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-
+import Header from '../components/Header_left';
 import '../styles/Home.css';
 
 const Login = () => {
@@ -88,6 +88,8 @@ const Login = () => {
     }, [records.length]);
 
     return (
+        <div>
+            <Header />
         <div className="login-outer-div">
             <div className="existing-fridge">
                 <form onSubmit={onLogin}>
@@ -116,6 +118,7 @@ const Login = () => {
                     <input className="login-button" type="submit" value="JOIN"></input>
                 </form>
             </div>
+        </div>
         </div>
     );
 };
