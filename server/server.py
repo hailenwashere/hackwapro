@@ -55,10 +55,20 @@ def deleteItem():
 @app.route('/askgpt', methods=['POST'])
 def ask_chatgpt():
     data = request.get_json()
-    prompt = data["prompt"]
-    response = gpt.chat(prompt)['message']['content']
+    fridgeID = data["prompt"] # this is actually the fridgeID
+    
+    ret = fb.getFridgeData(fridgeID)
+
+    if ret is None:
+        temp = {"response" : "Please enter a valid fridge code."}
+        return json.dumps(temp,ensure_ascii=False)
+    prompt = f"""Please list 5 recipes you can make witht the following ingridients: {ret}. Please only list the name of the dish.
+    Please include the ingridents and who each ingridient is from from under each recipe. Don't include emails."""
+    response = "Recommended Reciepes:\n\n"+gpt.chat(prompt)['message']['content']
+    
+    print(response)
     temp = {"response" : response}
-    return json.dumps(temp)
+    return json.dumps(temp,ensure_ascii=False)
 
 
 def exit_handler():

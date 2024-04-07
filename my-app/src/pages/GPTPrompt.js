@@ -44,12 +44,12 @@ const GPTPrompt = () => {
                         type="text"
                         id="prompt"
                         name="prompt"
-                        placeholder="Enter your prompt."
+                        placeholder="Enter your fridge ID."
                         value={form.prompt}
                         onChange={(e) => updateForm({ prompt: e.target.value })}
                     />
                     <div>
-                        <p>{responseText}</p>
+                        <pre>{responseText}</pre>
                     </div>
                     <input className="button" type="submit" value="Ask Jesus."></input>
                 </form>
