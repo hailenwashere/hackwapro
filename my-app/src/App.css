@@ -1,13 +1,79 @@
+/* || GENERAL */
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* LANDING COMPONENT */
+
+.landing-body {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+}
+
+/* LOGIN COMPONENT */
+
+.login-outer-div {
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    height: 100vh;
+}
+
+.existing-fridge {
+    padding: 95px;
+    width: 600px;
+    font-size: 30px;
+    background-color: #eeeeee;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;  */
+    border-radius: 20px;
+}
+
+.existing-fridge input {
+    width: 400px;
+    height: 40px;
+    margin-bottom: 40px;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.existing-fridge .login-button {
+    background-color: #62c6ff;
+    color: white;
+    font-weight: 800;
+    padding: 10px;
+    margin-bottom: 0px;
+    height: 50px;
+}
+
+.existing-fridge .login-button:hover {
+    cursor: pointer;
+}
+
+.existing-fridge .login-button:active {
+    background-color: #2a7aa8;
+}
+
 /* || HEADER COMPONENT */
 
 .header {
-  border: 1px solid black;
+    border: 1px solid black;
 }
 
 /* || FRIDGE COMPONENT */
 
 .fridge {
-  border: 1px solid black;
+    border: 1px solid black;
 }
 
 /* || ListItem Component */
