@@ -114,7 +114,7 @@ const IngredientRequest = () => {
 
         const code = localStorage.getItem("code");
         const requester = localStorage.getItem("name");
-        const requestee = owner_ingredient[currentowner];
+        const requestee = owner_ingredient[currentowner][0];
         const food_type = currentCategory;
         const category = ingredientName;
         let newquantity = owner_ingredient[currentowner][1].quantity
@@ -146,7 +146,9 @@ const IngredientRequest = () => {
                 quantity: newquantity
             }
 
-            await fetch("http://localhost:7272/requestitem", {
+            console.log(obj)
+
+            await fetch("http://localhost:7272/request", {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",
