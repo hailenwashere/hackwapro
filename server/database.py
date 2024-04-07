@@ -25,15 +25,13 @@ def saveState():
     with open('data.json','w') as f:
         json.dump(data, f)
 
-def initFridge(fridgeID):
+def initFridge(fridgeID, names, emails):
     #check if fridge has been made
     ref = db.reference("/fridges")
     curFridges = ref.get()
+        
     if fridgeID not in curFridges:
-        curFridges[fridgeID] = [{"category":"Meat","data":["filler"]},
-                                {"category":"Vegetables","data":["filler"]},
-                                {"category":"Dairy","data":["filler"]},
-                                {"category":"Seasoning","data":["filler"]}]
+        curFridges[fridgeID] = {"emails":{}}
     ref.set(curFridges)
 
 def getFridgeData(fridgeID):
@@ -63,6 +61,29 @@ def insertItem(fridgeID, itemData):
     prev = datetime.strptime(fridge[food_type][category]["min_expiry"], "%m/%d/%Y")
     if (cur-prev).days < 0:
         fridge[food_type][category]["min_expiry"] = expiration
+    ref.set(fridge)
+    return "something probably happened"
+
+def deleteItem(fridgeID, itemData):
+    ref = db.reference(f"/fridges/{fridgeID}")
+    food_type, category = itemData['food_type'], itemData['category']
+    owner, quantity = itemData['owner'], int(itemData['quantity'])
+    fridge = ref.get()
+    fridge[food_type][category]["ingredient_info"][owner]["quantity"]-=quantity
+    fridge[food_type][category]["total_quantity"]-=quantity
+    if fridge[food_type][category]["ingredient_info"][owner]["quantity"] == 0:
+        del fridge[food_type][category]["ingredient_info"][owner]
+        if len(fridge[food_type][category]["ingredient_info"]) == 0:
+            del fridge[food_type][category]
+            ref.set(fridge)
+            return "something probably happened"
+        min_time = datetime.strptime("12/30/2100", "%m/%d/%Y")
+        for p in fridge[food_type][category]["ingredient_info"]:
+            ingredient = fridge[food_type][category]["ingredient_info"][p]
+            if (min_time-datetime.strptime(ingredient["expiration"], "%m/%d/%Y")).days > 0:
+                min_time=ingredient["expiration"]
+    fridge[food_type][category]["min_expiry"] = min_time
+    print(fridge)
     ref.set(fridge)
     return "something probably happened"
 
