@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import '../styles/Home.css';
 import Header from '../components/Header';
 
+import '../styles/Home.css';
+
 const GPTPrompt = () => {
     const [form, setForm] = useState({
         prompt: "",
@@ -39,7 +41,8 @@ const GPTPrompt = () => {
     return (
         <body>
             <Header />
-            <div>
+            <div className="login-outer-div">
+            <div className="existing-fridge">
                 <form onSubmit={onLogin}>
                     <input
                         className="input-bar"
@@ -55,6 +58,7 @@ const GPTPrompt = () => {
                     </div>
                     <input className="button" type="submit" value="Ask Jesus."></input>
                 </form>
+            </div>
             </div>
         </body>
     )
