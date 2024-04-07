@@ -16,6 +16,17 @@ def hello():
     print("request received",file=sys.stderr)
     return "Hello world! CHEWYJ"
 
+@app.route('/makefridge', methods=['POST'])
+def makeFridge():
+    data = request.get_json()
+    ret = fb.getFridgeData(data['fridgeID'])
+    if ret is not None:
+        return "FridgeID already in use", 400
+    fridgeID = data['fridgeID']
+    emails = {}
+    names = {}
+    ret = fb.initFridge(fridgeID,names,emails)
+
 @app.route('/getdata', methods=['POST'])
 def getData():
     data = request.get_json()
@@ -25,10 +36,17 @@ def getData():
     return ret
 
 @app.route('/insertitem', methods=['POST'])
-def insertitem():
+def insertItem():
     data = request.get_json()
     fridgeID = data["fridgeID"]
     fb.insertItem(fridgeID,data)
+    return "dummy"
+
+@app.route('/deleteitem', methods=['POST'])
+def deleteItem():
+    data = request.get_json()
+    fridgeID = data["fridgeID"]
+    fb.deleteItem(fridgeID,data)
     return "dummy"
 
 def exit_handler():
