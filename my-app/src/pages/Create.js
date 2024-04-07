@@ -116,9 +116,11 @@ const Login = () => {
     return (
         <body>
             <Header />
-        <div>
-            <div className="title"> Create New Fridge</div>
+            <div className="login-outer-div">
+            <div className="existing-fridge-prime">
+            
             <form  onSubmit={onLogin}>
+            <div className="title"> Create New Fridge</div>
                 <input 
                 className= "input-bar" 
                 type="text" id="code" 
@@ -300,6 +302,7 @@ const Login = () => {
                 <input className="button" type="submit" value="Create."></input>
                 
             </form>
+        </div>
         </div>
         </body>
         
