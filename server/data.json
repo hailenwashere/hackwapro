@@ -1,1 +1,62 @@
-{"fridges": {"JACHEWY": {"Meat": {"beef": {"ingredient_info": {"Jacky": {"expiration": "04/09/2024", "quantity": 1}}, "min_expiry": "04/09/2024", "total_quantity": 1}, "chicken": {"ingredient_info": {"Ellen": {"expiration": "01/30/2024", "quantity": 2}, "Yifan": {"expiration": "01/24/2024", "quantity": 2}}, "min_expiry": "01/24/2024", "total_quantity": 4}}, "Vegetables": {"broccoli": {"ingredient_info": {"Ellen": {"expiration": "02/03/2024", "quantity": 2}, "Warrick": {"expiration": "01/24/2024", "quantity": 2}}, "min_expiry": "01/24/2024", "total_quantity": 4}}, "emails": {"Warrick": "warrickhe@g.ucla.edu", "Yifan": "yifantang@g.ucla.edu"}}}, "requests": {"80158468-f487-11ee-b404-dc4628ac6ba1": {"category": "chicken", "food_type": "Meat", "fridgeID": "JACHEWY", "quantity": "2", "requestee": "Yifan", "requester": "Ellen"}, "dummy": {"category": "chicken", "food_type": "Meat", "fridgeID": "JACHEWY", "quantity": 2, "requestee": "Warrick", "requester": "Yifan"}}}
+{
+    "fridges": {
+        "JACHEWY": {
+            "emails" : {
+                "Yifan": "yifan411@g.ucla.edu",
+                "Warrick": "warrickhe@g.ucla.edu"
+            },
+            "Meat": {
+                "chicken": {
+                    "total_quantity": 4,
+                    "min_expiry": "01/24/2024",
+                    "ingredient_info": {
+                        "Yifan": {
+                            "quantity": 2,
+                            "expiration": "01/24/2024"
+                        },
+                        "Ellen": {
+                            "quantity": 2,
+                            "expiration": "01/30/2024"
+                        }
+                    }
+                },
+                "beef": {
+                    "total_quantity": 1,
+                    "min_expiry": "04/09/2024",
+                    "ingredient_info": {
+                        "Jacky": {
+                            "quantity": 1,
+                            "expiration": "04/09/2024"
+                        }
+                    }
+                }
+            },
+            "Vegetables": {
+                "broccoli": {
+                    "total_quantity": 4,
+                    "min_expiry": "01/24/2024",
+                    "ingredient_info": {
+                        "Warrick": {
+                            "quantity": 2,
+                            "expiration": "01/24/2024"
+                        },
+                        "Ellen": {
+                            "quantity": 2,
+                            "expiration": "02/03/2024"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "requests" : {
+        "dummy": {
+            "fridgeID": "JACHEWY",
+            "requester": "Yifan",
+            "requestee": "Warrick",
+            "food_type": "Meat",
+            "category": "chicken",
+            "quantity": 2
+        }
+    }
+}
