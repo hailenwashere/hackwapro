@@ -79,29 +79,24 @@ const AddIngredient = () => {
             expiration: formatDate(expirationDate),
         };
 
-        await fetch("http://localhost:7272/insertitem", {
-          method: "POST",
-          headers: {
-          "Content-Type": "application/json",
-          },
-          body: JSON.stringify(obj),
-        })
-            .catch(error => {
-                window.alert(error);
-                return;
+        await fetch('http://localhost:7272/insertitem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(obj),
+        }).catch((error) => {
+            window.alert(error);
+            return;
         });
 
-
-        console.log("add Item works");
-
-        
-
+        console.log('add Item works');
     }
 
     return (
         <>
             <Header />
-            <div>
+            <div className="add-ingredient-div">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>
@@ -159,8 +154,10 @@ const AddIngredient = () => {
                             </select>
                         </label>
                     </div>
-                    <div className="submit">
-                        <button type="submit">Submit</button>
+                    <div className="add-ingredient-submit-btn">
+                        <button className="add-ingredient-submit-btn" type="submit">
+                            Submit
+                        </button>
                     </div>
                 </form>
             </div>
