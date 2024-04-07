@@ -42,7 +42,7 @@ const GPTPrompt = () => {
         <body>
             <Header />
             <div className="login-outer-div">
-            <div className="existing-fridge">
+            <div >
                 <form onSubmit={onLogin}>
                     <input
                         className="input-bar"
