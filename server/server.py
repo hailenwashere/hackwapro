@@ -3,10 +3,13 @@ import sys
 import pytz
 import time
 import atexit
+import json
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import database as fb
+import gpt
+
 
 app = Flask(__name__)
 CORS(app)
@@ -48,6 +51,15 @@ def deleteItem():
     fridgeID = data["fridgeID"]
     fb.deleteItem(fridgeID,data)
     return "dummy"
+
+@app.route('/askgpt', methods=['POST'])
+def ask_chatgpt():
+    data = request.get_json()
+    prompt = data["prompt"]
+    response = gpt.chat(prompt)['message']['content']
+    temp = {"response" : response}
+    return json.dumps(temp)
+
 
 def exit_handler():
     fb.saveState()
