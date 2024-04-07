@@ -7,6 +7,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import database as fb
+import gpt
 
 app = Flask(__name__)
 CORS(app)
@@ -27,6 +28,14 @@ def getData():
 @app.route('/putData', methods=['POST'])
 def putData():
     return "dummy"
+
+@app.route('/askgpt', methods=['POST'])
+def ask_chatgpt():
+    data = request.get_json()
+    prompt = data["prompt"]
+    response = gpt.chat(prompt)['message']['content']
+    return response
+
 
 def exit_handler():
     fb.saveState()

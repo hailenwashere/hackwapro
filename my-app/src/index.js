@@ -11,6 +11,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import GPTPrompt from './pages/GPTPrompt.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,12 +22,14 @@ root.render(
        <Route exact path="/" element={<Landing/>}/>
        <Route exact path="/login" element={<Login/>}/>
        <Route exact path="/home" element={<Home/>}/>
+       <Route exact path="/gpt" element={<GPTPrompt/>}/>
      </Routes>
      </Router>
   </React.StrictMode>
   <a href="./"> land</a>
   <a href="./login"> login</a>
   <a href="./home"> home</a>
+  <a href="./gpt"> GPTPrompt</a>
   </div>
 );
 
