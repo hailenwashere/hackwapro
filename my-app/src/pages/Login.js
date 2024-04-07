@@ -85,10 +85,10 @@ const Login = () => {
     }, [records.length]);
 
     return (
-        <body>
-            <div>
-                <div className="title">Fridge Code</div>
+        <div className="login-outer-div">
+            <div className="existing-fridge">
                 <form onSubmit={onLogin}>
+                    <div className="title">Fridge Code</div>
                     <input
                         className="input-bar"
                         type="text"
@@ -110,10 +110,10 @@ const Login = () => {
                             onChange={(e) => updateForm({ name: e.target.value })}
                         />
                     </div>
-                    <input className="button" type="submit" value="Login."></input>
+                    <input className="login-button" type="submit" value="JOIN"></input>
                 </form>
             </div>
-        </body>
+        </div>
     );
 };
 
