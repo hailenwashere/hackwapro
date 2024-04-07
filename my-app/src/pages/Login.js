@@ -27,17 +27,20 @@ const Login = () => {
         console.log(code)
         console.log(name)
         var loginValid = false;
-        if(code === "JCHEWY"){
-            // console.log("INININ");
-            localStorage.setItem("code", code);
-            const recString = JSON.stringify(records);
-            localStorage.setItem("data", recString)
-            navigate("/home");
-            window.location.reload();
-            loginValid = true;
+        if(code === "JACHEWY"){
+            if(name){
+                // console.log("INININ");
+                localStorage.setItem("code", code);
+                const recString = JSON.stringify(records);
+                localStorage.setItem("data", recString)
+                localStorage.setItem("name", name)
+                navigate("/home");
+                window.location.reload();
+                loginValid = true;
+            }
         }
         if(!loginValid){
-            alert("Fridge Not Found");
+            alert("Login Error");
         }
         // for(var record of records) {
         //     if(code === record["code"]) {

@@ -5,6 +5,9 @@ import 'react-datetime/css/react-datetime.css';
 import Header from '../components/Header';
 
 const AddIngredient = () => {
+    const [records, setRecords] = useState([]);
+
+
     const [ingredientName, setIngredientName] = useState('');
     const [quantity, setQuantity] = useState(null);
     const [expirationDate, setExpirationDate] = useState(null);
@@ -44,8 +47,31 @@ const AddIngredient = () => {
     }
 
     // Submit Form
-    function handleSubmit(e) {
+    // async function getRecords() {
+    //     const response = await fetch('http://localhost:7272/insertitem', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({
+    //         fridgeID: 'JACHEWY',
+    //       })
+    //     });
+    //     const records = await response.json();
+    //     setRecords(records);
+    // }
+
+    async function handleSubmit(e) {
         e.preventDefault();
+        // console.log(ingredientName);
+        // console.log(quantity);
+        // console.log(expirationDate);
+        // console.log(ingredientName);
+        const name = localStorage.getItem('name');
+        const code = localStorage.getItem('code');
+        // console.log(name);
+
         if (quantity === '0') {
             window.alert('Choose a non zero quantity!');
             return;
@@ -53,12 +79,32 @@ const AddIngredient = () => {
 
         // POST THIS TO BACKEND
         let obj = {
+            fridgeID: code,
             food_type: category,
             category: ingredientName.toLowerCase(),
-            owner: 'TEMP FIX THIS',
             quantity: quantity,
+            owner: name,
             expiration: formatDate(expirationDate),
         };
+
+        await fetch("http://localhost:7272/insertitem", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+
+        })
+            .catch(error => {
+                window.alert(error);
+                return;
+        });
+
+
+        console.log("works");
+
+        
+
     }
 
     return (
@@ -116,7 +162,7 @@ const AddIngredient = () => {
                             <select value={category} onChange={handleCategoryChange}>
                                 <option value="">Select category</option>
                                 <option value="Meat">Meat</option>
-                                <option value="Vegatables">Vegatables</option>
+                                <option value="Vegetables">Vegetables</option>
                                 <option value="Dairy">Dairy</option>
                                 <option value="Other">Other</option>
                             </select>
