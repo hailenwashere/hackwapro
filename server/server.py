@@ -39,8 +39,8 @@ def sendEmail(data,req_id):
         <body>
             <p>Hello {requestee}!<br>
             {requester} would like to use {qty} of {ingredient}<br>
-            <a href="http://www.realpython.com">Click Here to Accept</a> <br>
-            <a href="http://www.realpython.com">Click Here to Reject</a> 
+            <a href="{acc_link}">Click Here to Accept</a> <br>
+            <a href="{rej_link}">Click Here to Reject</a> 
             </p>
         </body>
         </html>
@@ -51,8 +51,9 @@ def sendEmail(data,req_id):
     message.attach(part2)
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        print("sender_email",sender_email)
         server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+        server.send_message(message)
         
 
 @app.route('/')
@@ -99,19 +100,19 @@ def makeRequest():
     data = request.get_json()
     req_id = fb.makeRequest(data)
     sendEmail(data,req_id)
-    return "Request no longer exists."
+    return "Request made, email delivered"
 
-@app.route('/accept', methods=['POST'])
+@app.route('/accept', methods=['GET'])
 def acceptRequest():
-    req_id = request.args.get("request_id")
+    req_id = request.args.get("req_id")
     if fb.requestExists(req_id):
         res = "!" if fb.acceptRequest(req_id) else " but there was not enough left."
         return "Request accepted"+res
     return "Request no longer exists."
 
-@app.route('/reject', methods=['POST'])
+@app.route('/reject', methods=['GET'])
 def rejectRequest():
-    req_id = request.args.get("request_id")
+    req_id = request.args.get("req_id")
     if fb.requestExists(req_id):
         fb.rejectRequest(req_id)
         return "Request Rejected"

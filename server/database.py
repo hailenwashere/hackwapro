@@ -94,7 +94,8 @@ def deleteItem(fridgeID, itemData):
     return True
 
 def makeRequest(reqBody):
-    req_id = uuid.uuid1()
+    req_id = str(uuid.uuid1())
+    print(req_id)
     ref = db.reference(f"/requests")
     requests = ref.get()
     requests[req_id] = {
@@ -105,12 +106,16 @@ def makeRequest(reqBody):
         "category": reqBody["category"],
         "quantity": reqBody["quantity"]
     }
-    ref.push(requests)
+    print(requests)
+    ref.set(requests)
     return req_id
 
 def requestExists(req_id):
     ref = db.reference(f"/requests")
     requests = ref.get()
+    print(requests)
+    print(req_id)
+    print(requests.keys())
     if req_id not in requests:
         return False
     return True
