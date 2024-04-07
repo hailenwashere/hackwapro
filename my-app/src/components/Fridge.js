@@ -39,25 +39,25 @@ export default function Fridge({ props }) {
     }
     // console.log(items)
 
-    return (
-        <div className="fridge-outer-div">
-            <h2>{props[0]}</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ingredient</th>
-                        <th>Quantity</th>
-                        <th>Earliest Expiration Date</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.map((item) => (
-                        <ListItem props={item} key={item[0]} />
-                    ))}
-                </tbody>
-            </table>
-            <ul></ul>
-        </div>
-    );
+  return (
+    <div className="fridge">
+      <h2>{props[0]}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ingredient</th>
+            <th>Quantity</th>
+            <th>Earliest Expiration Date</th>
+            <th>Request</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item) => (
+            <ListItem category={props[0]} ingredient={item} key={item[0]}/>
+          ))}
+        </tbody>
+      </table>
+      <ul></ul>
+    </div>
+  );
 }

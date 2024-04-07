@@ -7,6 +7,21 @@ export default function HomePage() {
     const [res, setRes] = useState(null);
 
     useEffect(() => {
+        async function updateRecords() {
+            const response = await fetch('http://localhost:7272/getdata', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fridgeID: 'JACHEWY',
+                }),
+            });
+            const records = await response.json();
+            localStorage.setItem('data', JSON.stringify(records))
+        }
+        updateRecords();
         const code = localStorage.getItem('code');
         const res = JSON.parse(localStorage.getItem('data'));
 
