@@ -248,3 +248,61 @@ body {
 .requestsection-btn:active {
     background-color: #388d3c;
 }
+
+/* ADD INGREDIENT COMPONENT */
+
+.add-ingredient-div {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-ingredient-div label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.add-ingredient-div input {
+    width: 700px;
+    height: 40px;
+    margin-bottom: 30px;
+    margin-top: 5px;
+    font-size: 15px;
+    padding: 5px;
+    background-color: #eeeeee;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.add-ingredient-div select {
+    width: 700px;
+    height: 40px;
+    margin-bottom: 30px;
+    margin-top: 5px;
+    font-size: 15px;
+    padding: 5px;
+    background-color: #eeeeee;
+    border: none;
+    padding: 5px;
+}
+
+.add-ingredient-submit-btn {
+    width: 700px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    background-color: #ff4f79;
+    border-radius: 10px;
+    border: none;
+}
+
+.add-ingredient-submit-btn:hover {
+    cursor: pointer;
+}
+
+.add-ingredient-submit-btn:active {
+    background-color: #c32348;
+}
