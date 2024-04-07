@@ -7,8 +7,10 @@ import Login from './pages/Login.js';
 import Landing from './pages/Landing.js';
 import Home from './pages/Home.js';
 import reportWebVitals from './reportWebVitals';
+import GPTPrompt from './pages/GPTPrompt.js';
 import IngredientRequest from './pages/IngredientRequest.js';
 import AddIngredient from './pages/AddIngredient.js';
+import Create from './pages/Create.js';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,12 +24,16 @@ root.render(
                     <Route exact path="/home" element={<Home />} />
                     <Route exact path="/add" element={<AddIngredient />} />
                     <Route exact path="/request" element={<IngredientRequest />} />
+                    <Route exact path="/gpt" element={<GPTPrompt/>}/>
+                    <Route exact path="/create" element={<Create/>}/>
                 </Routes>
             </Router>
         </React.StrictMode>
         <a href="./"> land</a>
         <a href="./login"> login</a>
         <a href="./home"> home</a>
+        <a href="./gpt"> GPTPrompt</a>
+        <a href="./create"> create</a>
     </div>
 );
 

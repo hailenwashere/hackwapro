@@ -1,15 +1,60 @@
 import requests
 import sys
-import pytz
 import time
+import email_details as e_d
 import atexit
+import json
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import database as fb
-
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import gpt
 app = Flask(__name__)
 CORS(app)
+
+def sendEmail(data,req_id):
+    acc_link = f"http://localhost:7272/accept?req_id={req_id}"
+    rej_link = f"http://localhost:7272/reject?req_id={req_id}"
+    requester = data["requester"]
+    requestee = data["requestee"]
+    ingredient = data["category"]
+    qty = data["quantity"]
+    fridgeID = data["fridgeID"]
+    receiver_email = fb.getEmail(fridgeID,requestee)
+    password = e_d.get_password()
+    sender_email = e_d.get_email()
+    port = 465
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "multipart test"
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message1 = f"Hello {requestee}!\n{requester} would like to use {qty} of {ingredient}.\n\
+        Click {acc_link} to accept the request.\n \
+            Click {rej_link} to reject the request.\n"
+    message2 = f"""\
+        <html>
+        <body>
+            <p>Hello {requestee}!<br>
+            {requester} would like to use {qty} of {ingredient}<br>
+            <a href="{acc_link}">Click Here to Accept</a> <br>
+            <a href="{rej_link}">Click Here to Reject</a> 
+            </p>
+        </body>
+        </html>
+        """
+    part1 = MIMEText(message1,"plain")
+    part2 = MIMEText(message2,"html")
+    message.attach(part1)
+    message.attach(part2)
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        print("sender_email",sender_email)
+        server.login(sender_email, password)
+        server.send_message(message)
+        
 
 @app.route('/')
 def hello():
@@ -19,13 +64,14 @@ def hello():
 @app.route('/makefridge', methods=['POST'])
 def makeFridge():
     data = request.get_json()
-    ret = fb.getFridgeData(data['fridgeID'])
+    ret = fb.getFridgeData(data['code'])
     if ret is not None:
         return "FridgeID already in use", 400
-    fridgeID = data['fridgeID']
-    emails = {}
-    names = {}
+    fridgeID = data['code']
+    emails = data['emailArray']
+    names = data['nameArray']
     ret = fb.initFridge(fridgeID,names,emails)
+    return "Initialized"
 
 @app.route('/getdata', methods=['POST'])
 def getData():
@@ -48,6 +94,48 @@ def deleteItem():
     fridgeID = data["fridgeID"]
     fb.deleteItem(fridgeID,data)
     return "dummy"
+
+@app.route('/request', methods=['POST'])
+def makeRequest():
+    data = request.get_json()
+    req_id = fb.makeRequest(data)
+    sendEmail(data,req_id)
+    return "Request made, email delivered"
+
+@app.route('/accept', methods=['GET'])
+def acceptRequest():
+    req_id = request.args.get("req_id")
+    if fb.requestExists(req_id):
+        res = "!" if fb.acceptRequest(req_id) else " but there was not enough left."
+        return "Request accepted"+res
+    return "Request no longer exists."
+
+@app.route('/reject', methods=['GET'])
+def rejectRequest():
+    req_id = request.args.get("req_id")
+    if fb.requestExists(req_id):
+        fb.rejectRequest(req_id)
+        return "Request Rejected"
+    return "Request no longer exists."
+
+@app.route('/askgpt', methods=['POST'])
+def ask_chatgpt():
+    data = request.get_json()
+    fridgeID = data["prompt"] # this is actually the fridgeID
+    
+    ret = fb.getFridgeData(fridgeID)
+
+    if ret is None:
+        temp = {"response" : "Please enter a valid fridge code."}
+        return json.dumps(temp,ensure_ascii=False)
+    prompt = f"""Please list 5 recipes you can make witht the following ingridients: {ret}. Please only list the name of the dish.
+    Please include the ingridents and who each ingridient is from from under each recipe. Don't include emails."""
+    response = "Recommended Reciepes:\n\n"+gpt.chat(prompt)['message']['content']
+    
+    print(response)
+    temp = {"response" : response}
+    return json.dumps(temp,ensure_ascii=False)
+
 
 def exit_handler():
     fb.saveState()

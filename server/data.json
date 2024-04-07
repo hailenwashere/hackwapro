@@ -50,13 +50,13 @@
         }
     },
     "requests" : {
-        "fake_req_id": {
+        "dummy": {
             "fridgeID": "JACHEWY",
             "requester": "Yifan",
             "requestee": "Warrick",
             "food_type": "Meat",
             "category": "chicken",
-            "quantity": 40
+            "quantity": 2
         }
     }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import ListItem from './ListItem';
 
 export default function Fridge({ props }) {
-  /* props looks like this
+    /* props looks like this
     [ "meat",
       {
         "chicken": {
@@ -33,12 +33,11 @@ export default function Fridge({ props }) {
     ]
   */
 
-  let items = Array();
-  for (const property in props[1])
-  {
-    items.push([property, props[1][property]])
-  }
-  // console.log(items)
+    let items = Array();
+    for (const property in props[1]) {
+        items.push([property, props[1][property]]);
+    }
+    // console.log(items)
 
   return (
     <div className="fridge">
