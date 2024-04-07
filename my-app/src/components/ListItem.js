@@ -22,23 +22,24 @@ export default function ListItem({ category, ingredient }) {
         ]
     */
 
-    const navigate = useNavigate()
-    const onClick = () =>
-    {
-        localStorage.setItem("currentCategory", category)
-        localStorage.setItem("currentIngredient", ingredient[0])
-        localStorage.setItem("ingredientSummary", JSON.stringify(ingredient[1]))
-        navigate('/request')
-    }
+    const navigate = useNavigate();
+    const onClick = () => {
+        localStorage.setItem('currentCategory', category);
+        localStorage.setItem('currentIngredient', ingredient[0]);
+        localStorage.setItem('ingredientSummary', JSON.stringify(ingredient[1]));
+        navigate('/request');
+    };
 
     return (
         <tr className="listItem">
-        <td>{ingredient[0]}</td>
-        <td>{ingredient[1].total_quantity}</td>
-        <td>{ingredient[1].min_expiry}</td>
-        <td>
-            <button onClick={ onClick }>Request</button>
-        </td>
+            <td>{ingredient[0]}</td>
+            <td>{ingredient[1].total_quantity}</td>
+            <td>{ingredient[1].min_expiry}</td>
+            <td>
+                <button className="request-btn" onClick={onClick}>
+                    Request
+                </button>
+            </td>
         </tr>
     );
 }

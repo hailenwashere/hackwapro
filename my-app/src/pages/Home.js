@@ -1,5 +1,6 @@
 import Fridge from '../components/Fridge';
 import Header from '../components/Header';
+import '../styles/Home.css';
 import React, { useEffect, useState } from 'react';
 
 export default function HomePage() {
@@ -19,7 +20,7 @@ export default function HomePage() {
                 }),
             });
             const records = await response.json();
-            localStorage.setItem('data', JSON.stringify(records))
+            localStorage.setItem('data', JSON.stringify(records));
         }
         updateRecords();
         const code = localStorage.getItem('code');
