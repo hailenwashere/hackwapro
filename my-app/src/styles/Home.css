@@ -1,4 +1,4 @@
-body {
+body.landing-body {
     display: flex;
     padding: 25px;
     justify-content: space-evenly;
@@ -7,14 +7,12 @@ body {
     border-left-style: hidden;
     background-color: #ffffff;
 }
-  
+
 code {
-font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-
-.tasks{
+.tasks {
     display: flex;
     padding: 25px;
     justify-content: space-evenly;
@@ -22,41 +20,39 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     border-right-style: hidden;
     border-left-style: hidden;
     background-color: #ffffff;
-
 }
 a {
     color: black;
     text-decoration: none;
-  }
-  
-  .party {
+}
+
+.party {
     animation: party 1s infinite;
-  }
-  
-  @keyframes party {
+}
+
+@keyframes party {
     0% {
-      background-color: #FF4136;
+        background-color: #ff4136;
     }
     25% {
-      background-color: #FFDC00;
+        background-color: #ffdc00;
     }
     50% {
-      background-color: #2ECC40;
+        background-color: #2ecc40;
     }
     75% {
-      background-color: #0074D9;
+        background-color: #0074d9;
     }
     100% {
-      background-color: #F012BE;
+        background-color: #f012be;
     }
-  }
+}
 
-  a:hover {
+a:hover {
     animation: party 1s infinite;
     text-decoration: underline;
-  }
+}
 
-  .points
-  {
+.points {
     font-size: 50px; /* Set the font size to 24 pixels */
-  }
+}

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // import { useNavigate } from "react-router";
@@ -9,14 +9,14 @@ const Home = () => {
     // const [records, setRecords] = useState([]);
     // const navigate = useNavigate();
     // // var sha1 = require('sha1');
- 
+
     // // creates temp form
     // const [form, setForm] = useState({
     //     username: "",
     //     password: "",
     // });
 
-    // // updates form 
+    // // updates form
     // function updateForm(value) {
     //     return setForm((prev) => {
     //     return { ...prev, ...value };
@@ -50,7 +50,6 @@ const Home = () => {
     //     }
     // }
 
-
     // This method fetches the records from the database.
     //     useEffect(() => {
     //     async function getRecords() {
@@ -63,18 +62,18 @@ const Home = () => {
     //     return;
     //   }, [records.length]);
 
-
-
     return (
-        <body>
-        <div style={styles.container}>
-        <div className="title" style={styles.title}>OURFRIDGE</div>
-        <Link to="./login" style={styles.startButton}>Start</Link>
-        </div>
+        <body className="landing-body">
+            <div style={styles.container}>
+                <div className="title" style={styles.title}>
+                    OURFRIDGE
+                </div>
+                <Link to="./login" style={styles.startButton}>
+                    Start
+                </Link>
+            </div>
         </body>
-        
-    )
-
+    );
 };
 
 const styles = {
@@ -84,13 +83,13 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         height: '100vh', // This will make the container take up the full height of the viewport
-      },
-      title: {
+    },
+    title: {
         fontSize: '200px', // Increase font size for a big title
         fontFamily: 'monospace',
         marginBottom: '20px',
-      },
-      startButton: {
+    },
+    startButton: {
         display: 'inline-block',
         padding: '10px 20px',
         fontSize: '18px',
@@ -99,10 +98,10 @@ const styles = {
         textDecoration: 'none',
         borderRadius: '5px',
         transition: 'background-color 0.3s ease',
-      },
-      startButtonHover: {
+    },
+    startButtonHover: {
         backgroundColor: '#0056b3',
-      },
-  };
+    },
+};
 
-  export default Home;
+export default Home;

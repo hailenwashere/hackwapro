@@ -27,18 +27,21 @@ const Login = () => {
         console.log(code);
         console.log(name);
         var loginValid = false;
-        console.log('JACHEWY' === code);
-        if (code === 'JACHEWY') {
-            console.log('INININ');
-            localStorage.setItem('code', code);
-            const recString = JSON.stringify(records);
-            localStorage.setItem('data', recString);
-            navigate('/home');
-            window.location.reload();
-            loginValid = true;
+
+        if(code === "JACHEWY"){
+            if(name){
+                // console.log("INININ");
+                localStorage.setItem("code", code);
+                const recString = JSON.stringify(records);
+                localStorage.setItem("data", recString)
+                localStorage.setItem("name", name)
+                navigate("/home");
+                window.location.reload();
+                loginValid = true;
+            }
         }
-        if (!loginValid) {
-            alert('Fridge Not Found');
+        if(!loginValid){
+            alert("Login Error");
         }
         // for(var record of records) {
         //     if(code === record["code"]) {
@@ -85,10 +88,10 @@ const Login = () => {
     }, [records.length]);
 
     return (
-        <body>
-            <div>
-                <div className="title">Fridge Code</div>
+        <div className="login-outer-div">
+            <div className="existing-fridge">
                 <form onSubmit={onLogin}>
+                    <div className="title">Fridge Code</div>
                     <input
                         className="input-bar"
                         type="text"
@@ -110,10 +113,10 @@ const Login = () => {
                             onChange={(e) => updateForm({ name: e.target.value })}
                         />
                     </div>
-                    <input className="button" type="submit" value="Login."></input>
+                    <input className="login-button" type="submit" value="JOIN"></input>
                 </form>
             </div>
-        </body>
+        </div>
     );
 };
 
