@@ -71,6 +71,10 @@ const Home = () => {
                 <Link to="./login" style={styles.startButton}>
                     Start
                 </Link>
+
+                <Link to="./create" style={styles.startButton}>
+                    Create 
+                </Link>
             </div>
         </body>
     );

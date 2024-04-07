@@ -5,9 +5,6 @@ import 'react-datetime/css/react-datetime.css';
 import Header from '../components/Header';
 
 const AddIngredient = () => {
-    const [records, setRecords] = useState([]);
-
-
     const [ingredientName, setIngredientName] = useState('');
     const [quantity, setQuantity] = useState(null);
     const [expirationDate, setExpirationDate] = useState(null);
@@ -64,13 +61,8 @@ const AddIngredient = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        // console.log(ingredientName);
-        // console.log(quantity);
-        // console.log(expirationDate);
-        // console.log(ingredientName);
         const name = localStorage.getItem('name');
         const code = localStorage.getItem('code');
-        // console.log(name);
 
         if (quantity === '0') {
             window.alert('Choose a non zero quantity!');
@@ -93,7 +85,6 @@ const AddIngredient = () => {
           "Content-Type": "application/json",
           },
           body: JSON.stringify(obj),
-
         })
             .catch(error => {
                 window.alert(error);
