@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import '../styles/Home.css';
 
@@ -7,37 +7,38 @@ const Login = () => {
     const [records, setRecords] = useState([]);
     const navigate = useNavigate();
     // var sha1 = require('sha1');
- 
+
     // creates temp form
     const [form, setForm] = useState({
-        code: "",
-        name: "",
+        code: '',
+        name: '',
     });
     function updateForm(value) {
         return setForm((prev) => {
-        return { ...prev, ...value };
+            return { ...prev, ...value };
         });
     }
 
     async function onLogin(e) {
         e.preventDefault();
-        var code = form.code
-        var name = form.name
-        console.log(records)
-        console.log(code)
-        console.log(name)
+        var code = form.code;
+        var name = form.name;
+        console.log(records);
+        console.log(code);
+        console.log(name);
         var loginValid = false;
-        if(code === "JCHEWY"){
-            // console.log("INININ");
-            localStorage.setItem("code", code);
+        console.log('JACHEWY' === code);
+        if (code === 'JACHEWY') {
+            console.log('INININ');
+            localStorage.setItem('code', code);
             const recString = JSON.stringify(records);
-            localStorage.setItem("data", recString)
-            navigate("/home");
+            localStorage.setItem('data', recString);
+            navigate('/home');
             window.location.reload();
             loginValid = true;
         }
-        if(!loginValid){
-            alert("Fridge Not Found");
+        if (!loginValid) {
+            alert('Fridge Not Found');
         }
         // for(var record of records) {
         //     if(code === record["code"]) {
@@ -64,57 +65,56 @@ const Login = () => {
 
     useEffect(() => {
         async function getRecords() {
-          const response = await fetch('http://localhost:7272/getdata', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              fridgeID: 'JACHEWY',
-            })
-          });
-          const records = await response.json();
-          setRecords(records);
+            const response = await fetch('http://localhost:7272/getdata', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fridgeID: 'JACHEWY',
+                }),
+            });
+            const records = await response.json();
+            setRecords(records);
         }
         // this immediately gets them
         getRecords();
-        console.log(records)
+        console.log(records);
         return;
-      }, [records.length]);
-
+    }, [records.length]);
 
     return (
         <body>
-        <div>
-            <div className="title">Fridge Code</div>
-            <form  onSubmit={onLogin}>
-                <input 
-                className= "input-bar" 
-                type="text" id="code" 
-                name="code" 
-                placeholder="ABCDE"
-                value={form.code}
-                onChange={(e) => updateForm({ code: e.target.value })}
-                />
-                <div className="login-text">Name</div>
-                <div>
-                    <input 
-                    className= "input-bar" 
-                    // type="name" 
-                    id="name" 
-                    name="name" 
-                    placeholder="Joe Bruin"
-                    value={form.name}
-                    onChange={(e) => updateForm({ name: e.target.value })}
+            <div>
+                <div className="title">Fridge Code</div>
+                <form onSubmit={onLogin}>
+                    <input
+                        className="input-bar"
+                        type="text"
+                        id="code"
+                        name="code"
+                        placeholder="ABCDE"
+                        value={form.code}
+                        onChange={(e) => updateForm({ code: e.target.value })}
                     />
-                </div>
-                <input className="button" type="submit" value="Login."></input>
-            </form>
-        </div>
+                    <div className="login-text">Name</div>
+                    <div>
+                        <input
+                            className="input-bar"
+                            // type="name"
+                            id="name"
+                            name="name"
+                            placeholder="Joe Bruin"
+                            value={form.name}
+                            onChange={(e) => updateForm({ name: e.target.value })}
+                        />
+                    </div>
+                    <input className="button" type="submit" value="Login."></input>
+                </form>
+            </div>
         </body>
-        
-    )
-}
+    );
+};
 
 export default Login;
