@@ -1,0 +1,54 @@
+/* Header.css */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+
+  }
+  
+  .left {
+    flex: 1;
+  }
+  
+  .logo {
+    margin: 0;
+    font-size: 40px;
+    font-family: monospace;
+    font-style: bold;
+  }
+  
+  .right {
+    display: flex;
+  }
+  
+  .button_header {
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #c994f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    line-height: 30px; /* Adjusted line-height for vertical centering */
+  }
+  
+  .button_header:hover {
+    background-color: #0056b3;
+  }
+
+  .button-short {
+    padding: 5px 20px; /* Adjusted padding for shorter height */
+    font-style: italic;
+  }
+  .add_item {
+    padding: 5px 20px;
+    background-color: #f4397d;
+
+  }
+  
+
+  
