@@ -72,11 +72,62 @@ body {
 
 /* || FRIDGE COMPONENT */
 
-.fridge {
-    border: 1px solid black;
+.fridge-outer-div {
+    /* border: 1px solid black; */
+    width: 90%;
+    padding: 10px 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fridge-outer-div h2 {
+    font-size: 25px;
+    font-weight: 600;
+    padding-left: 20px;
+}
+
+.fridge-outer-div table {
+    width: 100%;
+    padding: 25px;
+    border-radius: 20px;
+    background-color: #fef3ff;
+    table-layout: auto;
+}
+
+.fridge-outer-div th {
+    text-align: left;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.fridge-outer-div tbody {
+    text-align: left;
+}
+
+.fridge-outer-div td {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 /* || ListItem Component */
 
-.listItem {
+.request-btn {
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+    width: 200px;
+    height: 40px;
+    background-color: #6fa0ff;
+    color: white;
+    border: none;
+}
+
+.request-btn:hover {
+    cursor: pointer;
+}
+
+.request-btn:active {
+    background-color: #2a7aa8;
 }

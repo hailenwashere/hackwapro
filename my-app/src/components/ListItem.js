@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 export default function ListItem({ props }) {
     /* props looks like this 
@@ -22,22 +22,23 @@ export default function ListItem({ props }) {
         ]
     */
 
-    const navigate = useNavigate()
-    const onClick = () =>
-    {
-        localStorage.setItem("currentIngredient", props[0])
-        localStorage.setItem("ingredientSummary", JSON.stringify(props[1]))
-        navigate('/request')
-    }
+    const navigate = useNavigate();
+    const onClick = () => {
+        localStorage.setItem('currentIngredient', props[0]);
+        localStorage.setItem('ingredientSummary', JSON.stringify(props[1]));
+        navigate('/request');
+    };
 
     return (
         <tr className="listItem">
-        <td>{props[0]}</td>
-        <td>{props[1].total_quantity}</td>
-        <td>{props[1].min_expiry}</td>
-        <td>
-            <button onClick={ onClick }>Request</button>
-        </td>
+            <td>{props[0]}</td>
+            <td>{props[1].total_quantity}</td>
+            <td>{props[1].min_expiry}</td>
+            <td>
+                <button className="request-btn" onClick={onClick}>
+                    Request
+                </button>
+            </td>
         </tr>
     );
 }
