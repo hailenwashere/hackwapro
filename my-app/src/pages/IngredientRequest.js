@@ -34,9 +34,10 @@ const IngredientRequest = () => {
     }
 
     // fetch data from local storage
+    const currentCategory = localStorage.getItem("currentCategory")
     const ingredientName = localStorage.getItem("currentIngredient")
     let props = JSON.parse(localStorage.getItem("ingredientSummary"))
-    if (props == null || ingredientName == null)
+    if (props == null || ingredientName == null || currentCategory == null)
     {
         return (
             <>
@@ -45,21 +46,20 @@ const IngredientRequest = () => {
             </>
         )
     }
-    // console.log(props)
     
     let total_quantity = props.total_quantity;
     let ingredient_info = props.ingredient_info;
-    let owner_ingredient = Array();
-    /* looks like this
-        [
-            ["yifan", {...}],
-            ["ellen", {...}]
-        ]
-    */
+    let owner_ingredient = [];
     for (const property in ingredient_info)
     {
         owner_ingredient.push([property, ingredient_info[property]])
     }
+                    /* looks like this
+                        [
+                            ["yifan", {...}],
+                            ["ellen", {...}]
+                        ]
+                    */
 
     // sort ingredients by soonest expiring ingredients
     function compareIngredients(a, b)
@@ -102,8 +102,6 @@ const IngredientRequest = () => {
         }
     }
     owner_ingredient.sort(compareIngredients)
-    // console.log(ingredient_info)
-    // console.log(owner_ingredient)
 
     // quantity dropdown: update quantity using dropdown, gives options up to total_quantity
     const possiblequantities = Array(total_quantity + 1).fill(0).map((_, index)=> index);
@@ -112,14 +110,58 @@ const IngredientRequest = () => {
     };
 
     // request button: on request, update the data
-    function onRequestClick() 
+    async function onRequestClick() 
     {
         // update data
-        
-        // post data
-            /* schema:
+        let quantityleft = quantity;
+        let currentowner = 0;
 
-            */
+        const code = localStorage.getItem("code");
+        const requester = localStorage.getItem("name");
+        const requestee = owner_ingredient[currentowner];
+        const food_type = currentCategory;
+        const category = ingredientName;
+        let newquantity = owner_ingredient[currentowner][1].quantity
+
+        while (quantityleft > 0)
+        {
+            // get number of ingredients this person has
+            let numowned = owner_ingredient[currentowner][1].quantity;
+
+            // subtract number of ingredients needed
+            if (quantityleft > numowned)
+            {
+                quantityleft -= numowned;
+                numowned = 0;
+            } else {
+                quantityleft = 0;
+                numowned -= quantityleft;
+            }
+            newquantity = numowned
+            
+            // post data
+            let obj = {
+                fridgeID: code,
+                requester: requester,
+                requestee: requestee,
+                food_type: food_type,
+                category: category,
+                quantity: newquantity
+            }
+
+            await fetch("http://localhost:7272/requestitem", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(obj),
+
+            })
+                .catch(error => {
+                    window.alert(error);
+                    return;
+            });
+        }
 
         setRequestmade(true);
     }

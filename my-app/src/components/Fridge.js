@@ -54,7 +54,7 @@ export default function Fridge({ props }) {
         </thead>
         <tbody>
           {items.map((item) => (
-            <ListItem props={item} key={item[0]}/>
+            <ListItem category={props[0]} ingredient={item} key={item[0]}/>
           ))}
         </tbody>
       </table>
