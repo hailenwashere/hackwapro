@@ -5,7 +5,7 @@ Table 4's repo for Hack with a Pro 2024! Our 3rd-place-winning final project is 
 # To set up the project
 ## Frontend
 ```bash
-cd frontend
+cd my-app
 npm i
 npm start
 ```
